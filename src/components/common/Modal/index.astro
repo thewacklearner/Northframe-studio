@@ -1,0 +1,26 @@
+---
+interface Props {
+    id: string;
+    title?: string;
+}
+
+const { id, title } = Astro.props;
+---
+
+<dialog id={id} class="modal">
+    <div class="modal-content">
+        {title && <h3>{title}</h3>}
+        <slot />
+        <form method="dialog">
+            <button>Close</button>
+        </form>
+    </div>
+</dialog>
+
+<style>
+    .modal {
+        border-radius: 0.5rem;
+        border: 1px solid #ccc;
+        padding: 2rem;
+    }
+</style>

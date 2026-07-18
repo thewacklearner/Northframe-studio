@@ -1,17 +1,20 @@
 ---
-
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/home/Hero/index.astro";
+import Features from "../components/home/Features/index.astro";
+import Services from "../components/home/Services/index.astro";
+import Portfolio from "../components/home/Portfolio/index.astro";
+import Team from "../components/home/Team/index.astro";
+import Testimonials from "../components/home/Testimonials/index.astro";
+import CTA from "../components/home/CTA/index.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Home">
+    <Hero />
+    <Features />
+    <Services />
+    <Portfolio />
+    <Team />
+    <Testimonials />
+    <CTA />
+</BaseLayout>

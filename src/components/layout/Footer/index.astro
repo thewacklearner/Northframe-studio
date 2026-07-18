@@ -1,0 +1,212 @@
+---
+const year = new Date().getFullYear();
+
+const links = [
+    { href: "/", label: "Home" },
+    { href: "/about", label: "About" },
+    { href: "/services", label: "Services" },
+    { href: "/portfolio", label: "Work" },
+    { href: "/contact", label: "Contact" },
+];
+---
+
+<footer class="footer">
+    <div class="container">
+        <!-- Top row -->
+        <div class="footer__top">
+            <div class="footer__brand">
+                <a href="/" class="footer__logo" aria-label="Northframe Studio">
+                    <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 28 28"
+                        fill="none"
+                        aria-hidden="true"
+                    >
+                        <rect width="12" height="12" fill="currentColor"></rect>
+                        <rect
+                            x="16"
+                            width="12"
+                            height="12"
+                            fill="currentColor"
+                            opacity="0.35"></rect>
+                        <rect
+                            y="16"
+                            width="12"
+                            height="12"
+                            fill="currentColor"
+                            opacity="0.35"></rect>
+                        <rect
+                            x="16"
+                            y="16"
+                            width="12"
+                            height="12"
+                            fill="currentColor"></rect>
+                    </svg>
+                    <span>Northframe</span>
+                </a>
+                <p class="footer__tagline">
+                    Building thoughtful digital experiences<br />
+                    for ambitious brands.
+                </p>
+            </div>
+
+            <nav class="footer__nav" aria-label="Footer navigation">
+                <p class="footer__nav-heading label">Navigation</p>
+                <ul class="footer__nav-list">
+                    {
+                        links.map(({ href, label }) => (
+                            <li>
+                                <a href={href} class="footer__link">
+                                    {label}
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </nav>
+
+            <div class="footer__contact">
+                <p class="footer__nav-heading label">Get In Touch</p>
+                <ul class="footer__contact-list">
+                    <li>
+                        <a
+                            href="mailto:hello@northframe.studio"
+                            class="footer__link"
+                        >
+                            hello@northframe.studio
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="tel:+15550000000"
+                            class="footer__link footer__link--muted"
+                        >
+                            +1 (555) 000-0000
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="footer__divider" data-line-reveal></div>
+
+        <!-- Bottom bar -->
+        <div class="footer__bottom">
+            <p class="footer__copy">
+                &copy; {year} Northframe Studio. All rights reserved.
+            </p>
+            <div class="footer__legal">
+                <a href="/privacy" class="footer__link footer__link--muted"
+                    >Privacy</a
+                >
+                <a href="/terms" class="footer__link footer__link--muted"
+                    >Terms</a
+                >
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+    .footer {
+        background: var(--clr-surface);
+        border-top: 1px solid var(--clr-border);
+        padding-block: 5rem 2.5rem;
+    }
+
+    /* Top */
+    .footer__top {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 3rem;
+        padding-bottom: 3rem;
+    }
+
+    /* Brand */
+    .footer__logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--clr-accent);
+        font-family: var(--font-body);
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--clr-text);
+        margin-bottom: 1.25rem;
+    }
+    .footer__logo svg {
+        color: var(--clr-accent);
+    }
+
+    .footer__tagline {
+        font-size: 0.875rem;
+        color: var(--clr-text-2);
+        line-height: 1.7;
+    }
+
+    /* Nav */
+    .footer__nav-heading {
+        margin-bottom: 1.25rem;
+    }
+
+    .footer__nav-list,
+    .footer__contact-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+    }
+
+    .footer__link {
+        font-size: 0.875rem;
+        color: var(--clr-text-2);
+        transition: color var(--dur) var(--ease-out);
+    }
+    .footer__link:hover {
+        color: var(--clr-text);
+    }
+    .footer__link--muted {
+        color: var(--clr-text-3);
+    }
+    .footer__link--muted:hover {
+        color: var(--clr-text-2);
+    }
+
+    /* Divider */
+    .footer__divider {
+        height: 1px;
+        background: var(--clr-border);
+        transform-origin: left center;
+    }
+
+    /* Bottom */
+    .footer__bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 1.75rem;
+        gap: 1rem;
+    }
+
+    .footer__copy {
+        font-size: 0.78rem;
+        color: var(--clr-text-3);
+    }
+
+    .footer__legal {
+        display: flex;
+        gap: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+        .footer__top {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        .footer__bottom {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+</style>

@@ -1,0 +1,336 @@
+<section class="hero">
+    <!-- Ambient glow -->
+    <div class="hero__glow" aria-hidden="true"></div>
+
+    <!-- Noise texture overlay -->
+    <div class="hero__grain" aria-hidden="true"></div>
+
+    <!-- Main content -->
+    <div class="container hero__inner">
+        <!-- Badge -->
+        <div class="hero__badge" data-hero-badge>
+            <span class="hero__badge-dot" aria-hidden="true"></span>
+            Creative Studio &nbsp;·&nbsp; Est. 2024
+        </div>
+
+        <!-- Headline -->
+        <h1 class="hero__headline">
+            <span class="hero__line" data-hero-line>We design</span>
+            <span class="hero__line hero__line--em" data-hero-line
+                >digital futures</span
+            >
+            <span class="hero__line" data-hero-line>that endure.</span>
+        </h1>
+
+        <!-- Subtext -->
+        <p class="hero__sub" data-hero-sub>
+            Northframe is a creative studio building exceptional<br />
+            digital experiences for forward-thinking brands.
+        </p>
+
+        <!-- CTAs -->
+        <div class="hero__actions" data-hero-actions>
+            <a href="/portfolio" class="btn btn--primary">
+                View Our Work
+                <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    aria-hidden="true"
+                >
+                    <path
+                        d="M3 8h10M9 4l4 4-4 4"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                </svg>
+            </a>
+            <a href="/contact" class="btn btn--ghost">Get in Touch</a>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="hero__scroll" data-hero-scroll>
+            <div class="scroll-track">
+                <div class="scroll-thumb"></div>
+            </div>
+            <span class="scroll-label" aria-hidden="true">Scroll</span>
+        </div>
+    </div>
+
+    <!-- Stats bar -->
+    <div class="hero__stats">
+        <div class="container hero__stats-inner">
+            <div class="stat" data-hero-stat>
+                <span class="stat__num" data-count="120" data-suffix="+"
+                    >0+</span
+                >
+                <span class="stat__label">Projects Delivered</span>
+            </div>
+            <div class="stat__sep" aria-hidden="true"></div>
+            <div class="stat" data-hero-stat>
+                <span class="stat__num" data-count="8" data-suffix=" yrs"
+                    >0 yrs</span
+                >
+                <span class="stat__label">Years of Craft</span>
+            </div>
+            <div class="stat__sep" aria-hidden="true"></div>
+            <div class="stat" data-hero-stat>
+                <span class="stat__num" data-count="40" data-suffix="+">0+</span
+                >
+                <span class="stat__label">Happy Clients</span>
+            </div>
+            <div class="stat__sep" aria-hidden="true"></div>
+            <div class="stat" data-hero-stat>
+                <span class="stat__num" data-count="5" data-suffix=" awards"
+                    >0 awards</span
+                >
+                <span class="stat__label">Industry Recognition</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* ─── Shell ──────────────────────────────────────────────── */
+    .hero {
+        position: relative;
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        padding-top: var(--header-h);
+        overflow: hidden;
+    }
+
+    /* ─── Background effects ─────────────────────────────────── */
+    .hero__glow {
+        position: absolute;
+        top: -15%;
+        right: -5%;
+        width: min(700px, 80vw);
+        height: min(700px, 80vw);
+        background: radial-gradient(
+            circle,
+            rgba(201, 245, 66, 0.07) 0%,
+            transparent 65%
+        );
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .hero__grain {
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+        background-size: 250px 250px;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.6;
+    }
+
+    /* ─── Inner content ──────────────────────────────────────── */
+    .hero__inner {
+        position: relative;
+        z-index: 1;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+        padding-top: clamp(3.5rem, 8vh, 5rem);
+        padding-bottom: clamp(5rem, 12vh, 8rem);
+    }
+
+    /* ─── Badge ──────────────────────────────────────────────── */
+    .hero__badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--clr-text-2);
+        padding: 0.45rem 1rem 0.45rem 0.8rem;
+        border: 1px solid var(--clr-border-2);
+        border-radius: var(--radius-full);
+        width: fit-content;
+    }
+
+    .hero__badge-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--clr-accent);
+        animation: blink 2.4s ease-in-out infinite;
+        flex-shrink: 0;
+    }
+
+    @keyframes blink {
+        0%,
+        100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.3;
+        }
+    }
+
+    /* ─── Headline ───────────────────────────────────────────── */
+    .hero__headline {
+        display: flex;
+        flex-direction: column;
+        font-size: clamp(3.2rem, 8.5vw, 8rem);
+        font-weight: 400;
+        line-height: 0.95;
+        letter-spacing: -0.03em;
+        color: var(--clr-text);
+        max-width: 14ch;
+    }
+
+    .hero__line {
+        overflow: hidden;
+        display: block;
+        padding-bottom: 0.05em; /* prevent descender clip */
+    }
+
+    .hero__line--em {
+        font-style: italic;
+        color: var(--clr-text-2);
+    }
+
+    /* ─── Sub ────────────────────────────────────────────────── */
+    .hero__sub {
+        font-size: clamp(1rem, 1.4vw, 1.15rem);
+        color: var(--clr-text-2);
+        line-height: 1.75;
+        font-weight: 300;
+        max-width: 48ch;
+    }
+
+    /* ─── Actions ────────────────────────────────────────────── */
+    .hero__actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.875rem;
+    }
+
+    /* ─── Scroll indicator ───────────────────────────────────── */
+    .hero__scroll {
+        position: absolute;
+        bottom: 2.5rem;
+        left: var(--gutter);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
+    .scroll-track {
+        width: 1px;
+        height: 64px;
+        background: var(--clr-border-2);
+        overflow: hidden;
+        border-radius: 1px;
+    }
+
+    .scroll-thumb {
+        width: 100%;
+        background: var(--clr-accent);
+        height: 50%;
+        transform: translateY(-100%);
+        animation: scrollAnim 2s var(--ease-out) infinite 2s;
+    }
+
+    @keyframes scrollAnim {
+        0% {
+            transform: translateY(-100%);
+        }
+        100% {
+            transform: translateY(200%);
+        }
+    }
+
+    .scroll-label {
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--clr-text-3);
+        writing-mode: vertical-lr;
+        transform: rotate(180deg);
+    }
+
+    /* ─── Stats bar ──────────────────────────────────────────── */
+    .hero__stats {
+        position: relative;
+        z-index: 1;
+        border-top: 1px solid var(--clr-border);
+    }
+
+    .hero__stats-inner {
+        display: flex;
+        align-items: center;
+        padding-block: 2rem;
+        gap: 0;
+    }
+
+    .stat {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        padding-inline: clamp(1rem, 3vw, 2.5rem);
+    }
+    .stat:first-child {
+        padding-left: 0;
+    }
+
+    .stat__num {
+        font-family: var(--font-display);
+        font-size: clamp(1.75rem, 3vw, 2.5rem);
+        font-weight: 400;
+        letter-spacing: -0.03em;
+        line-height: 1;
+        color: var(--clr-text);
+    }
+
+    .stat__label {
+        font-size: 0.78rem;
+        color: var(--clr-text-2);
+        font-weight: 400;
+    }
+
+    .stat__sep {
+        width: 1px;
+        height: 36px;
+        background: var(--clr-border);
+        flex-shrink: 0;
+    }
+
+    /* ─── Responsive ─────────────────────────────────────────── */
+    @media (max-width: 768px) {
+        .hero__stats-inner {
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        .stat {
+            flex: calc(50% - 0.75rem);
+            padding-inline: 0;
+        }
+        .stat__sep {
+            display: none;
+        }
+        .hero__scroll {
+            display: none;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .hero__headline {
+            font-size: clamp(2.8rem, 12vw, 4rem);
+        }
+    }
+</style>

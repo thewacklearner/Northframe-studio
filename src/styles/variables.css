@@ -1,0 +1,39 @@
+:root {
+  /* ─── Colors ──────────────────────────────────────────────── */
+  --clr-bg:          #060606;
+  --clr-surface:     #0f0f0f;
+  --clr-surface-2:   #181818;
+  --clr-border:      #1c1c1c;
+  --clr-border-2:    #2a2a2a;
+
+  --clr-text:        #f0ede8;
+  --clr-text-2:      #888480;
+  --clr-text-3:      #444240;
+
+  --clr-accent:      #c9f542;
+  --clr-accent-dim:  rgba(201, 245, 66, 0.1);
+  --clr-white:       #ffffff;
+
+  /* ─── Typography ─────────────────────────────────────────── */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+  --font-mono:    'Space Mono', 'Courier New', monospace;
+
+  /* ─── Layout ─────────────────────────────────────────────── */
+  --max-w:       1280px;
+  --gutter:      clamp(1.25rem, 4vw, 3rem);
+  --section-py:  clamp(5rem, 10vw, 9rem);
+  --header-h:    72px;
+
+  /* ─── Radii ──────────────────────────────────────────────── */
+  --radius-sm:   4px;
+  --radius-md:   10px;
+  --radius-lg:   20px;
+  --radius-xl:   28px;
+  --radius-full: 9999px;
+
+  /* ─── Motion ─────────────────────────────────────────────── */
+  --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-io:   cubic-bezier(0.76, 0, 0.24, 1);
+  --dur:       0.4s;
+}

@@ -1,0 +1,65 @@
+---
+const links = [
+    { href: "/", label: "Home" },
+    { href: "/about", label: "About" },
+    { href: "/services", label: "Services" },
+    { href: "/portfolio", label: "Work" },
+    { href: "/contact", label: "Contact" },
+];
+---
+
+<nav class="nav" aria-label="Main navigation">
+    <ul class="nav__list">
+        {
+            links.map(({ href, label }) => (
+                <li>
+                    <a href={href} class="nav__link">
+                        {label}
+                    </a>
+                </li>
+            ))
+        }
+    </ul>
+</nav>
+
+<style>
+    .nav__list {
+        display: flex;
+        align-items: center;
+        gap: 2.5rem;
+    }
+
+    .nav__link {
+        position: relative;
+        font-size: 0.875rem;
+        font-weight: 400;
+        color: var(--clr-text-2);
+        letter-spacing: 0.01em;
+        padding-block: 0.25rem;
+        transition: color var(--dur) var(--ease-out);
+    }
+
+    .nav__link::after {
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: var(--clr-accent);
+        transition: width var(--dur) var(--ease-out);
+    }
+
+    .nav__link:hover {
+        color: var(--clr-text);
+    }
+    .nav__link:hover::after {
+        width: 100%;
+    }
+
+    @media (max-width: 768px) {
+        .nav {
+            display: none;
+        }
+    }
+</style>

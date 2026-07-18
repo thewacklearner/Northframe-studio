@@ -1,0 +1,209 @@
+---
+const testimonials = [
+    {
+        quote: "Northframe transformed our brand completely. The attention to detail and strategic thinking elevated everything we do.",
+        author: "Sarah Chen",
+        company: "Lumina Labs",
+        initials: "SC",
+    },
+    {
+        quote: "Working with this team was unlike anything we've experienced. They challenged our thinking in the best way possible.",
+        author: "James Orwell",
+        company: "Orbit Finance",
+        initials: "JO",
+    },
+    {
+        quote: "The website they built for us is absolutely stunning — and it performs. Leads have grown 3× since launch.",
+        author: "Priya Nair",
+        company: "Forma Studio",
+        initials: "PN",
+    },
+    {
+        quote: "Every pixel matters to them. I've never worked with a studio that cares this deeply about the craft.",
+        author: "Luca Romano",
+        company: "Apex Commerce",
+        initials: "LR",
+    },
+    {
+        quote: "They delivered a brand identity that truly captures who we are. It's become the cornerstone of our visual presence.",
+        author: "Mei Lin",
+        company: "Pulse Media",
+        initials: "ML",
+    },
+];
+---
+
+<section class="testimonials">
+    <div class="container">
+        <div class="testimonials__header">
+            <span class="label" data-reveal>Client Love</span>
+            <h2 class="testimonials__title" data-split-words>
+                What people<br />are saying
+            </h2>
+        </div>
+    </div>
+
+    <!-- Scrolling track (duplicated for seamless loop) -->
+    <div class="testimonials__track-wrap" aria-label="Client testimonials">
+        <div class="testimonials__track">
+            {
+                [...testimonials, ...testimonials].map(
+                    ({ quote, author, company, initials }) => (
+                        <article class="testi-card">
+                            <blockquote class="testi-card__quote">
+                                <p>"{quote}"</p>
+                            </blockquote>
+                            <footer class="testi-card__footer">
+                                <div
+                                    class="testi-card__avatar"
+                                    aria-hidden="true"
+                                >
+                                    {initials}
+                                </div>
+                                <div>
+                                    <cite class="testi-card__author">
+                                        {author}
+                                    </cite>
+                                    <span class="testi-card__company">
+                                        {company}
+                                    </span>
+                                </div>
+                            </footer>
+                        </article>
+                    ),
+                )
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .testimonials {
+        padding-block: var(--section-py);
+        border-top: 1px solid var(--clr-border);
+        overflow: hidden;
+    }
+
+    /* ─── Header ─────────────────────────────────────────────── */
+    .testimonials__header {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-bottom: clamp(3rem, 6vw, 4rem);
+    }
+
+    .testimonials__title {
+        font-size: clamp(2.5rem, 5vw, 4.5rem);
+        font-weight: 400;
+        color: var(--clr-text);
+        letter-spacing: -0.03em;
+        line-height: 1;
+        overflow: hidden;
+    }
+
+    /* ─── Marquee ────────────────────────────────────────────── */
+    .testimonials__track-wrap {
+        -webkit-mask-image: linear-gradient(
+            to right,
+            transparent 0%,
+            black 6%,
+            black 94%,
+            transparent 100%
+        );
+        mask-image: linear-gradient(
+            to right,
+            transparent 0%,
+            black 6%,
+            black 94%,
+            transparent 100%
+        );
+    }
+
+    .testimonials__track {
+        display: flex;
+        gap: 1.25rem;
+        width: max-content;
+        animation: testi-scroll 40s linear infinite;
+    }
+
+    .testimonials__track:hover {
+        animation-play-state: paused;
+    }
+
+    @keyframes testi-scroll {
+        from {
+            transform: translateX(0);
+        }
+        to {
+            transform: translateX(-50%);
+        }
+    }
+
+    /* ─── Card ───────────────────────────────────────────────── */
+    .testi-card {
+        flex-shrink: 0;
+        width: min(400px, 85vw);
+        padding: 2rem;
+        background: var(--clr-surface);
+        border: 1px solid var(--clr-border);
+        border-radius: var(--radius-xl);
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        transition:
+            border-color var(--dur) var(--ease-out),
+            background var(--dur) var(--ease-out);
+    }
+
+    .testi-card:hover {
+        border-color: var(--clr-border-2);
+        background: var(--clr-surface-2);
+    }
+
+    .testi-card__quote p {
+        font-family: var(--font-display);
+        font-size: clamp(1rem, 1.5vw, 1.2rem);
+        font-style: italic;
+        color: var(--clr-text);
+        line-height: 1.6;
+        letter-spacing: -0.01em;
+    }
+
+    .testi-card__footer {
+        display: flex;
+        align-items: center;
+        gap: 0.875rem;
+        margin-top: auto;
+    }
+
+    .testi-card__avatar {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: var(--clr-accent-dim);
+        border: 1px solid var(--clr-border-2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        letter-spacing: 0.05em;
+        color: var(--clr-accent);
+        flex-shrink: 0;
+    }
+
+    .testi-card__author {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 500;
+        font-style: normal;
+        color: var(--clr-text);
+    }
+
+    .testi-card__company {
+        display: block;
+        font-size: 0.75rem;
+        color: var(--clr-text-2);
+        margin-top: 0.1rem;
+    }
+</style>

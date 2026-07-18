@@ -1,0 +1,109 @@
+---
+const capabilities = [
+    "Brand Identity",
+    "Web Design",
+    "Motion & Interaction",
+    "Digital Strategy",
+    "UI / UX Design",
+    "Creative Direction",
+    "Front-End Development",
+    "Art Direction",
+];
+---
+
+<section class="features" aria-label="Our capabilities">
+    <div class="features__label container" data-reveal>
+        <span class="label">Our Capabilities</span>
+    </div>
+
+    <!-- Marquee track (duplicated for seamless loop) -->
+    <div class="features__track-wrap">
+        <div class="features__track" aria-hidden="true">
+            {
+                [...capabilities, ...capabilities].map((item) => (
+                    <span class="features__item">
+                        {item}
+                        <span class="features__sep">✦</span>
+                    </span>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .features {
+        padding-block: clamp(3rem, 6vw, 5rem);
+        border-top: 1px solid var(--clr-border);
+        overflow: hidden;
+    }
+
+    .features__label {
+        margin-bottom: 2rem;
+    }
+
+    /* ─── Marquee ────────────────────────────────────────────── */
+    .features__track-wrap {
+        overflow: hidden;
+        -webkit-mask-image: linear-gradient(
+            to right,
+            transparent 0%,
+            black 8%,
+            black 92%,
+            transparent 100%
+        );
+        mask-image: linear-gradient(
+            to right,
+            transparent 0%,
+            black 8%,
+            black 92%,
+            transparent 100%
+        );
+    }
+
+    .features__track {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        width: max-content;
+        animation: marquee 28s linear infinite;
+    }
+
+    .features__track:hover {
+        animation-play-state: paused;
+    }
+
+    @keyframes marquee {
+        from {
+            transform: translateX(0);
+        }
+        to {
+            transform: translateX(-50%);
+        }
+    }
+
+    .features__item {
+        display: inline-flex;
+        align-items: center;
+        gap: 1.5rem;
+        font-family: var(--font-display);
+        font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+        font-weight: 400;
+        font-style: italic;
+        color: var(--clr-text-3);
+        white-space: nowrap;
+        padding-right: 1.5rem;
+        transition: color var(--dur) var(--ease-out);
+    }
+
+    .features__track:hover .features__item:hover {
+        color: var(--clr-text);
+    }
+
+    .features__sep {
+        font-style: normal;
+        color: var(--clr-accent);
+        font-size: 0.75em;
+        flex-shrink: 0;
+    }
+</style>
