@@ -1,7 +1,435 @@
 ---
-import PageLayout from '../layouts/PageLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { team } from "../data/team";
 ---
 
-<PageLayout title="About Us">
-  <p>Learn more about our company.</p>
-</PageLayout>
+<BaseLayout
+    title="About"
+    description="Northframe is a small studio focused on thoughtful brand, web, and motion work."
+>
+    <section class="about-hero">
+        <div class="container about-hero__inner">
+            <div class="about-hero__copy">
+                <h1 class="about-hero__title" data-split-words>
+                    A small studio for clear, lasting digital work.
+                </h1>
+                <div class="about-hero__text">
+                    <p data-reveal>
+                        Northframe works across brand, web, and motion with an
+                        emphasis on clarity, restraint, and careful execution.
+                    </p>
+                    <p data-reveal data-delay="0.08">
+                        We are three core members right now, which keeps the
+                        process direct. The people shaping the work are the same
+                        people you speak with from the first conversation to the
+                        final handoff.
+                    </p>
+                </div>
+            </div>
+
+            <aside class="about-hero__aside" data-reveal data-delay="0.12">
+                <div class="about-hero__panel">
+                    <p class="about-hero__panel-title">
+                        What we bring to the table
+                    </p>
+                    <ul class="about-hero__list">
+                        <li>Brand identity and visual systems</li>
+                        <li>Editorial web design and front-end development</li>
+                        <li>
+                            Motion that supports the work, not distracts from it
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+    <section class="about-principles">
+        <div class="container">
+            <div class="about-principles__intro">
+                <h2 class="about-principles__title" data-split-words>
+                    Our approach stays simple.
+                </h2>
+                <p class="about-principles__lead" data-reveal>
+                    We do our best work when the idea is clear, the process is
+                    calm, and every detail has a reason to be there.
+                </p>
+            </div>
+
+            <div class="about-principles__list" data-stagger-group>
+                <article class="principle" data-stagger-item>
+                    <h3 class="principle__title">Clarity first</h3>
+                    <p class="principle__text">
+                        We spend time getting the structure right early so the
+                        final experience feels obvious, not over-explained.
+                    </p>
+                </article>
+                <article class="principle" data-stagger-item>
+                    <h3 class="principle__title">Small-team attention</h3>
+                    <p class="principle__text">
+                        Fewer layers mean faster decisions, tighter feedback,
+                        and work that holds its shape from concept to launch.
+                    </p>
+                </article>
+                <article class="principle" data-stagger-item>
+                    <h3 class="principle__title">Care in the finish</h3>
+                    <p class="principle__text">
+                        Typography, rhythm, interaction, and performance are
+                        treated as part of the message, not polish added at the
+                        end.
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-team">
+        <div class="container">
+            <div class="about-team__intro">
+                <h2 class="about-team__title" data-split-words>
+                    The three people behind the studio.
+                </h2>
+                <p class="about-team__lead" data-reveal>
+                    Different disciplines, one shared standard for how the work
+                    should feel.
+                </p>
+            </div>
+
+            <div class="about-team__grid" data-stagger-group>
+                {
+                    team.map(({ name, role, bio, initials, hue }) => (
+                        <article class="member" data-stagger-item>
+                            <div
+                                class="member__avatar"
+                                style={`background: hsl(${hue} 30% 12%); --hue: ${hue}`}
+                                aria-hidden="true"
+                            >
+                                <span class="member__initials">{initials}</span>
+                                <div class="member__glow" />
+                            </div>
+                            <div class="member__body">
+                                <h3 class="member__name">{name}</h3>
+                                <p class="member__role">{role}</p>
+                                <p class="member__bio">{bio}</p>
+                            </div>
+                        </article>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <section class="about-closing">
+        <div class="container about-closing__inner">
+            <div>
+                <h2 class="about-closing__title" data-reveal>
+                    If you have a project in mind, we'd be glad to hear about
+                    it.
+                </h2>
+                <p class="about-closing__text" data-reveal data-delay="0.06">
+                    We take on a limited number of projects at a time so the
+                    work can stay focused.
+                </p>
+            </div>
+            <a
+                href="/contact"
+                class="btn btn--primary about-closing__cta"
+                data-reveal
+                data-delay="0.12"
+            >
+                Start a Conversation
+            </a>
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+    .about-hero,
+    .about-principles,
+    .about-team,
+    .about-closing {
+        border-top: 1px solid var(--clr-border);
+    }
+
+    .about-hero {
+        padding-top: calc(var(--header-h) + clamp(4rem, 10vw, 7rem));
+        padding-bottom: clamp(4rem, 8vw, 6rem);
+    }
+
+    .about-hero__inner {
+        display: grid;
+        grid-template-columns: minmax(0, 1.65fr) minmax(280px, 0.75fr);
+        gap: clamp(2rem, 5vw, 4rem);
+        align-items: end;
+    }
+
+    .about-hero__copy {
+        max-width: 58rem;
+    }
+
+    .about-hero__title {
+        font-size: clamp(3rem, 8vw, 5.8rem);
+        font-weight: 400;
+        line-height: 0.96;
+        letter-spacing: -0.03em;
+        max-width: 11ch;
+        overflow: hidden;
+        text-wrap: balance;
+    }
+
+    .about-hero__text {
+        display: grid;
+        gap: 1rem;
+        margin-top: clamp(2rem, 4vw, 2.75rem);
+        max-width: 46rem;
+    }
+
+    .about-hero__text p {
+        max-width: 54ch;
+        font-size: clamp(1rem, 1.5vw, 1.1rem);
+        line-height: 1.8;
+        color: var(--clr-text-2);
+    }
+
+    .about-hero__panel {
+        padding: 1.5rem 0 0;
+        border-top: 1px solid var(--clr-border-2);
+    }
+
+    .about-hero__panel-title {
+        font-size: 0.88rem;
+        color: var(--clr-text);
+        margin-bottom: 1rem;
+    }
+
+    .about-hero__list {
+        display: grid;
+        gap: 0.9rem;
+    }
+
+    .about-hero__list li {
+        position: relative;
+        padding-left: 1rem;
+        font-size: 0.92rem;
+        line-height: 1.7;
+        color: var(--clr-text-2);
+    }
+
+    .about-hero__list li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.78rem;
+        width: 0.3rem;
+        height: 0.3rem;
+        border-radius: 50%;
+        background: var(--clr-accent);
+    }
+
+    .about-principles {
+        padding-block: clamp(4rem, 8vw, 6rem);
+    }
+
+    .about-principles__intro {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.8fr);
+        gap: 2rem;
+        margin-bottom: clamp(2.5rem, 5vw, 4rem);
+        align-items: end;
+    }
+
+    .about-principles__title,
+    .about-team__title {
+        font-size: clamp(2.4rem, 5vw, 4.4rem);
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: -0.03em;
+        overflow: hidden;
+        text-wrap: balance;
+    }
+
+    .about-principles__lead,
+    .about-team__lead {
+        max-width: 34ch;
+        font-size: 0.98rem;
+        line-height: 1.75;
+        color: var(--clr-text-2);
+        justify-self: end;
+    }
+
+    .about-principles__list {
+        display: grid;
+        gap: 0;
+        border-top: 1px solid var(--clr-border);
+    }
+
+    .principle {
+        display: grid;
+        grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1fr);
+        gap: 2rem;
+        padding: 1.5rem 0;
+        border-bottom: 1px solid var(--clr-border);
+    }
+
+    .principle__title {
+        font-size: clamp(1.15rem, 2vw, 1.45rem);
+        font-weight: 400;
+        letter-spacing: -0.02em;
+    }
+
+    .principle__text {
+        max-width: 56ch;
+        font-size: 0.95rem;
+        line-height: 1.75;
+        color: var(--clr-text-2);
+    }
+
+    .about-team {
+        padding-block: clamp(4rem, 8vw, 6rem);
+    }
+
+    .about-team__intro {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.8fr);
+        gap: 2rem;
+        margin-bottom: clamp(2.75rem, 5vw, 4rem);
+        align-items: end;
+    }
+
+    .about-team__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+
+    .member {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    .member__avatar {
+        position: relative;
+        aspect-ratio: 3 / 4;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.45s var(--ease-out);
+    }
+
+    .member:hover .member__avatar {
+        transform: translateY(-4px);
+    }
+
+    .member__glow {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+            circle at 60% 40%,
+            hsla(var(--hue), 70%, 60%, 0.16) 0%,
+            transparent 65%
+        );
+    }
+
+    .member__initials {
+        position: relative;
+        z-index: 1;
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 400;
+        color: rgba(240, 237, 232, 0.16);
+        letter-spacing: -0.02em;
+    }
+
+    .member__body {
+        display: grid;
+        gap: 0.35rem;
+    }
+
+    .member__name {
+        font-size: 1.2rem;
+        font-weight: 400;
+        letter-spacing: -0.02em;
+    }
+
+    .member__role {
+        font-size: 0.85rem;
+        color: var(--clr-accent);
+    }
+
+    .member__bio {
+        max-width: 32ch;
+        font-size: 0.9rem;
+        line-height: 1.72;
+        color: var(--clr-text-2);
+    }
+
+    .about-closing {
+        padding-block: clamp(4rem, 8vw, 6rem) clamp(5rem, 10vw, 7rem);
+    }
+
+    .about-closing__inner {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 2rem;
+    }
+
+    .about-closing__title {
+        max-width: 16ch;
+        font-size: clamp(2rem, 4vw, 3.6rem);
+        font-weight: 400;
+        line-height: 1.02;
+        letter-spacing: -0.03em;
+    }
+
+    .about-closing__text {
+        margin-top: 1rem;
+        max-width: 42ch;
+        font-size: 0.95rem;
+        line-height: 1.75;
+        color: var(--clr-text-2);
+    }
+
+    .about-closing__cta {
+        flex-shrink: 0;
+    }
+
+    @media (max-width: 960px) {
+        .about-hero__inner,
+        .about-principles__intro,
+        .about-team__intro,
+        .principle,
+        .about-closing__inner {
+            grid-template-columns: 1fr;
+            display: grid;
+            align-items: start;
+        }
+
+        .about-principles__lead,
+        .about-team__lead {
+            justify-self: start;
+        }
+
+        .about-team__grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 640px) {
+        .about-hero__title {
+            max-width: 9ch;
+        }
+
+        .about-team__grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .about-closing__cta {
+            width: fit-content;
+        }
+    }
+</style>

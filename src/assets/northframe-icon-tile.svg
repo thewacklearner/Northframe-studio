@@ -1,0 +1,36 @@
+<svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="frameGrad" x1="0" y1="0" x2="320" y2="320" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7d97ae"/>
+      <stop offset="1" stop-color="#3c5570"/>
+    </linearGradient>
+    <linearGradient id="silverGrad" x1="100" y1="140" x2="160" y2="230" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#eef0f2"/>
+      <stop offset="1" stop-color="#98a1a9"/>
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="220" y1="130" x2="160" y2="220" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7089a1"/>
+      <stop offset="1" stop-color="#33475c"/>
+    </linearGradient>
+    <linearGradient id="diagGrad" x1="105" y1="235" x2="225" y2="125" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.5" stop-color="#f2f4f5"/>
+      <stop offset="1" stop-color="#aab3bb"/>
+    </linearGradient>
+  </defs>
+
+  <!-- dark tile background -->
+  <rect x="0" y="0" width="320" height="320" rx="56" fill="#0a0a0d"/>
+
+  <!-- compass point -->
+  <path d="M160,8 L130,50 L160,50 Z" fill="#d7dce0"/>
+  <path d="M160,8 L160,50 L190,50 Z" fill="#4c6680"/>
+
+  <!-- rounded-square frame -->
+  <rect x="40" y="50" width="240" height="240" rx="34" fill="none" stroke="url(#frameGrad)" stroke-width="14"/>
+
+  <!-- N monogram -->
+  <path d="M220,220 L220,130 L160,130" fill="none" stroke="url(#blueGrad)" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M100,140 L100,230 L160,230" fill="none" stroke="url(#silverGrad)" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M105,235 L225,125" fill="none" stroke="url(#diagGrad)" stroke-width="26" stroke-linecap="round"/>
+</svg>

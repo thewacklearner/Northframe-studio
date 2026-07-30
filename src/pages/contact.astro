@@ -1,10 +1,649 @@
 ---
-import PageLayout from '../layouts/PageLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { company } from "../data/company";
+import { team } from "../data/team";
+import { services } from "../data/services";
+
+const inquiryOptions = services.map((service) => service.title);
 ---
 
-<PageLayout title="Contact Us">
-  <form>
-    <label>Name: <input type="text" /></label>
-    <button type="submit">Send</button>
-  </form>
-</PageLayout>
+<BaseLayout
+    title="Contact"
+    description="Get in touch with Northframe about websites, SEO, automation systems, and ongoing digital work."
+>
+    <section class="contact-hero">
+        <div class="container contact-hero__inner">
+            <div class="contact-hero__copy">
+                <h1 class="contact-hero__title" data-split-words>
+                    Let's talk about what needs to be built.
+                </h1>
+                <div class="contact-hero__text">
+                    <p data-reveal>
+                        If you already have a brief, send it through. If the
+                        project is still taking shape, that is fine too — a
+                        clear starting point is usually enough.
+                    </p>
+                    <p data-reveal data-delay="0.08">
+                        We work best when the conversation is direct, the scope
+                        is honest, and the goal is clear from the beginning.
+                    </p>
+                </div>
+            </div>
+
+            <aside class="contact-hero__aside" data-reveal data-delay="0.12">
+                <div class="contact-hero__panel">
+                    <p class="contact-hero__panel-title">General contact</p>
+                    <a
+                        href={`mailto:${company.email}`}
+                        class="contact-hero__panel-link"
+                    >
+                        {company.email}
+                    </a>
+                    <a
+                        href={`tel:${company.phone.replace(/\s+/g, "")}`}
+                        class="contact-hero__panel-link contact-hero__panel-link--muted"
+                    >
+                        {company.phone}
+                    </a>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+    <section class="contact-main">
+        <div class="container contact-main__grid">
+            <div class="contact-form-wrap" data-reveal>
+                <div class="contact-form-wrap__head">
+                    <h2 class="contact-form-wrap__title">Send an inquiry</h2>
+                    <p class="contact-form-wrap__intro">
+                        Tell us a little about the project and the best way to
+                        reach you.
+                    </p>
+                </div>
+
+                <form
+                    class="contact-form"
+                    action={`mailto:${company.email}`}
+                    method="post"
+                    enctype="text/plain"
+                >
+                    <div class="contact-form__row contact-form__row--2">
+                        <label class="field">
+                            <span class="field__label">Name</span>
+                            <input
+                                class="field__input"
+                                type="text"
+                                name="name"
+                                placeholder="Your name"
+                                required
+                            />
+                        </label>
+
+                        <label class="field">
+                            <span class="field__label">Email</span>
+                            <input
+                                class="field__input"
+                                type="email"
+                                name="email"
+                                placeholder="you@company.com"
+                                required
+                            />
+                        </label>
+                    </div>
+
+                    <div class="contact-form__row contact-form__row--2">
+                        <label class="field">
+                            <span class="field__label">Company</span>
+                            <input
+                                class="field__input"
+                                type="text"
+                                name="company"
+                                placeholder="Company or organisation"
+                            />
+                        </label>
+
+                        <label class="field">
+                            <span class="field__label">Service</span>
+                            <select
+                                class="field__input field__input--select"
+                                name="service"
+                            >
+                                <option value="">Select a service</option>
+                                {
+                                    inquiryOptions.map((option) => (
+                                        <option value={option}>{option}</option>
+                                    ))
+                                }
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="contact-form__row contact-form__row--2">
+                        <label class="field">
+                            <span class="field__label">Timeline</span>
+                            <input
+                                class="field__input"
+                                type="text"
+                                name="timeline"
+                                placeholder="e.g. 4–6 weeks"
+                            />
+                        </label>
+
+                        <label class="field">
+                            <span class="field__label">Budget range</span>
+                            <input
+                                class="field__input"
+                                type="text"
+                                name="budget"
+                                placeholder="Optional"
+                            />
+                        </label>
+                    </div>
+
+                    <label class="field">
+                        <span class="field__label">Project details</span>
+                        <textarea
+                            class="field__input field__input--textarea"
+                            name="message"
+                            rows="7"
+                            placeholder="A short outline of what you need, what exists already, and what a good outcome would look like."
+                            required></textarea>
+                    </label>
+
+                    <div class="contact-form__footer">
+                        <p class="contact-form__note">
+                            This form opens your mail client and sends the
+                            inquiry to {company.email}.
+                        </p>
+                        <button
+                            type="submit"
+                            class="btn btn--primary contact-form__submit"
+                        >
+                            Send Inquiry
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="contact-side" data-stagger-group>
+                <section class="contact-panel" data-stagger-item>
+                    <h2 class="contact-panel__title">Studio details</h2>
+                    <div class="contact-panel__stack">
+                        <div>
+                            <p class="contact-panel__label">Email</p>
+                            <a
+                                href={`mailto:${company.email}`}
+                                class="contact-panel__link">{company.email}</a
+                            >
+                        </div>
+                        <div>
+                            <p class="contact-panel__label">Phone</p>
+                            <a
+                                href={`tel:${company.phone.replace(/\s+/g, "")}`}
+                                class="contact-panel__link">{company.phone}</a
+                            >
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contact-panel" data-stagger-item>
+                    <h2 class="contact-panel__title">Socials</h2>
+                    <ul class="social-list">
+                        {
+                            company.socials.map((social) => (
+                                <li class="social-list__item">
+                                    <span class="social-list__platform">
+                                        {social.platform}
+                                    </span>
+                                    {social.href ? (
+                                        <a
+                                            href={social.href}
+                                            class="social-list__handle"
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >
+                                            {social.handle}
+                                        </a>
+                                    ) : (
+                                        <span class="social-list__handle">
+                                            {social.handle}
+                                        </span>
+                                    )}
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-contact">
+        <div class="container">
+            <div class="team-contact__intro">
+                <h2 class="team-contact__title" data-split-words>
+                    Reach the right person directly.
+                </h2>
+                <p class="team-contact__lead" data-reveal>
+                    For focused conversations, you can write to the core team
+                    members directly.
+                </p>
+            </div>
+
+            <div class="team-contact__grid" data-stagger-group>
+                {
+                    team.map(
+                        ({
+                            name,
+                            role,
+                            initials,
+                            hue,
+                            contactFocus,
+                            contactEmail,
+                        }) => (
+                            <article class="person-card" data-stagger-item>
+                                <div
+                                    class="person-card__avatar"
+                                    style={`background: hsl(${hue} 30% 12%); --hue: ${hue}`}
+                                    aria-hidden="true"
+                                >
+                                    <span class="person-card__initials">
+                                        {initials}
+                                    </span>
+                                    <div class="person-card__glow" />
+                                </div>
+
+                                <div class="person-card__body">
+                                    <h3 class="person-card__name">{name}</h3>
+                                    <p class="person-card__role">{role}</p>
+                                    {contactFocus && (
+                                        <p class="person-card__focus">
+                                            {contactFocus}
+                                        </p>
+                                    )}
+                                    {contactEmail && (
+                                        <a
+                                            href={`mailto:${contactEmail}`}
+                                            class="person-card__email"
+                                        >
+                                            {contactEmail}
+                                        </a>
+                                    )}
+                                </div>
+                            </article>
+                        ),
+                    )
+                }
+            </div>
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+    .contact-hero,
+    .contact-main,
+    .team-contact {
+        border-top: 1px solid var(--clr-border);
+    }
+
+    .contact-hero {
+        padding-top: calc(var(--header-h) + clamp(4rem, 10vw, 7rem));
+        padding-bottom: clamp(4rem, 8vw, 6rem);
+    }
+
+    .contact-hero__inner {
+        display: grid;
+        grid-template-columns: minmax(0, 1.65fr) minmax(280px, 0.75fr);
+        gap: clamp(2rem, 5vw, 4rem);
+        align-items: end;
+    }
+
+    .contact-hero__title {
+        font-size: clamp(3rem, 8vw, 5.8rem);
+        font-weight: 400;
+        line-height: 0.96;
+        letter-spacing: -0.03em;
+        max-width: 11ch;
+        overflow: hidden;
+        text-wrap: balance;
+    }
+
+    .contact-hero__text {
+        display: grid;
+        gap: 1rem;
+        margin-top: clamp(2rem, 4vw, 2.75rem);
+        max-width: 46rem;
+    }
+
+    .contact-hero__text p {
+        max-width: 54ch;
+        font-size: clamp(1rem, 1.5vw, 1.1rem);
+        line-height: 1.8;
+        color: var(--clr-text-2);
+    }
+
+    .contact-hero__panel {
+        padding: 1.5rem 0 0;
+        border-top: 1px solid var(--clr-border-2);
+        display: grid;
+        gap: 0.85rem;
+    }
+
+    .contact-hero__panel-title {
+        font-size: 0.88rem;
+        color: var(--clr-text);
+    }
+
+    .contact-hero__panel-link {
+        width: fit-content;
+        font-size: 1rem;
+        color: var(--clr-text);
+        transition: color var(--dur) var(--ease-out);
+    }
+
+    .contact-hero__panel-link:hover {
+        color: var(--clr-accent);
+    }
+
+    .contact-hero__panel-link--muted {
+        color: var(--clr-text-2);
+    }
+
+    .contact-main {
+        padding-block: clamp(4rem, 8vw, 6rem);
+    }
+
+    .contact-main__grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.75fr);
+        gap: clamp(2rem, 4vw, 3rem);
+        align-items: start;
+    }
+
+    .contact-form-wrap {
+        border: 1px solid var(--clr-border);
+        border-radius: var(--radius-xl);
+        background: linear-gradient(
+            180deg,
+            var(--clr-surface) 0%,
+            rgba(15, 15, 15, 0.65) 100%
+        );
+        padding: clamp(1.5rem, 3vw, 2.25rem);
+    }
+
+    .contact-form-wrap__head {
+        margin-bottom: 1.75rem;
+    }
+
+    .contact-form-wrap__title,
+    .contact-panel__title,
+    .team-contact__title {
+        font-size: clamp(2rem, 4vw, 3.4rem);
+        font-weight: 400;
+        line-height: 1.02;
+        letter-spacing: -0.03em;
+        text-wrap: balance;
+    }
+
+    .contact-form-wrap__intro,
+    .team-contact__lead {
+        margin-top: 0.9rem;
+        max-width: 42ch;
+        font-size: 0.95rem;
+        line-height: 1.75;
+        color: var(--clr-text-2);
+    }
+
+    .contact-form {
+        display: grid;
+        gap: 1rem;
+    }
+
+    .contact-form__row {
+        display: grid;
+        gap: 1rem;
+    }
+
+    .contact-form__row--2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .field {
+        display: grid;
+        gap: 0.55rem;
+    }
+
+    .field__label {
+        font-size: 0.82rem;
+        color: var(--clr-text);
+    }
+
+    .field__input {
+        width: 100%;
+        border: 1px solid var(--clr-border-2);
+        border-radius: 16px;
+        background: rgba(6, 6, 6, 0.72);
+        color: var(--clr-text);
+        padding: 0.95rem 1rem;
+        font: inherit;
+        line-height: 1.5;
+        transition:
+            border-color var(--dur) var(--ease-out),
+            background var(--dur) var(--ease-out);
+    }
+
+    .field__input::placeholder {
+        color: var(--clr-text-3);
+    }
+
+    .field__input:focus {
+        outline: none;
+        border-color: var(--clr-accent);
+        background: rgba(6, 6, 6, 0.92);
+    }
+
+    .field__input--textarea {
+        resize: vertical;
+        min-height: 10rem;
+    }
+
+    .field__input--select {
+        appearance: none;
+    }
+
+    .contact-form__footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding-top: 0.5rem;
+    }
+
+    .contact-form__note {
+        max-width: 34ch;
+        font-size: 0.82rem;
+        line-height: 1.6;
+        color: var(--clr-text-3);
+    }
+
+    .contact-form__submit {
+        flex-shrink: 0;
+    }
+
+    .contact-side {
+        display: grid;
+        gap: 1rem;
+    }
+
+    .contact-panel {
+        border: 1px solid var(--clr-border);
+        border-radius: var(--radius-lg);
+        padding: 1.5rem;
+        background: rgba(15, 15, 15, 0.7);
+    }
+
+    .contact-panel__title {
+        font-size: clamp(1.4rem, 2vw, 1.85rem);
+    }
+
+    .contact-panel__stack {
+        display: grid;
+        gap: 1.2rem;
+        margin-top: 1.2rem;
+    }
+
+    .contact-panel__label,
+    .social-list__platform,
+    .person-card__role {
+        font-size: 0.76rem;
+        color: var(--clr-text-3);
+    }
+
+    .contact-panel__link,
+    .social-list__handle,
+    .person-card__email {
+        display: inline-block;
+        margin-top: 0.35rem;
+        font-size: 0.95rem;
+        color: var(--clr-text);
+        transition: color var(--dur) var(--ease-out);
+    }
+
+    .contact-panel__link:hover,
+    .person-card__email:hover,
+    .social-list__handle:hover {
+        color: var(--clr-accent);
+    }
+
+    .social-list {
+        display: grid;
+        gap: 1rem;
+        margin-top: 1.2rem;
+    }
+
+    .social-list__item {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 1rem;
+        padding-bottom: 0.9rem;
+        border-bottom: 1px solid var(--clr-border);
+    }
+
+    .team-contact {
+        padding-block: clamp(4rem, 8vw, 6rem) clamp(5rem, 10vw, 7rem);
+    }
+
+    .team-contact__intro {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.8fr);
+        gap: 2rem;
+        align-items: end;
+        margin-bottom: clamp(2.75rem, 5vw, 4rem);
+    }
+
+    .team-contact__lead {
+        justify-self: end;
+        margin-top: 0;
+    }
+
+    .team-contact__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+
+    .person-card {
+        display: flex;
+        flex-direction: column;
+        gap: 1.15rem;
+    }
+
+    .person-card__avatar {
+        position: relative;
+        aspect-ratio: 3 / 4;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .person-card__glow {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+            circle at 60% 40%,
+            hsla(var(--hue), 70%, 60%, 0.16) 0%,
+            transparent 65%
+        );
+    }
+
+    .person-card__initials {
+        position: relative;
+        z-index: 1;
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 400;
+        color: rgba(240, 237, 232, 0.16);
+        letter-spacing: -0.02em;
+    }
+
+    .person-card__body {
+        display: grid;
+        gap: 0.3rem;
+    }
+
+    .person-card__name {
+        font-size: 1.2rem;
+        font-weight: 400;
+        letter-spacing: -0.02em;
+    }
+
+    .person-card__focus {
+        font-size: 0.9rem;
+        color: var(--clr-text-2);
+        line-height: 1.7;
+        margin-top: 0.35rem;
+    }
+
+    @media (max-width: 960px) {
+        .contact-hero__inner,
+        .contact-main__grid,
+        .team-contact__intro {
+            grid-template-columns: 1fr;
+            align-items: start;
+        }
+
+        .team-contact__lead {
+            justify-self: start;
+        }
+
+        .team-contact__grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 720px) {
+        .contact-form__row--2 {
+            grid-template-columns: 1fr;
+        }
+
+        .contact-form__footer,
+        .social-list__item {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+
+    @media (max-width: 560px) {
+        .contact-hero__title {
+            max-width: 9ch;
+        }
+
+        .team-contact__grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+    }
+</style>

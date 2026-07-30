@@ -1,11 +1,383 @@
 ---
-import PageLayout from '../layouts/PageLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { services } from "../data/services";
+
+const extras = [
+    "Website audits",
+    "Analytics setup",
+    "Content migrations",
+    "Form integrations",
+    "Tracking fixes",
+    "Conversion improvements",
+];
 ---
 
-<PageLayout title="Our Services">
-  <ul>
-    <li>Service 1</li>
-    <li>Service 2</li>
-    <li>Service 3</li>
-  </ul>
-</PageLayout>
+<BaseLayout
+    title="Services"
+    description="Website development, SEO optimization, automation systems, and ongoing technical support."
+>
+    <section class="services-hero">
+        <div class="container services-hero__inner">
+            <div class="services-hero__copy">
+                <h1 class="services-hero__title" data-split-words>
+                    Practical digital services for growing teams.
+                </h1>
+                <div class="services-hero__text">
+                    <p data-reveal>
+                        We build and improve websites with an emphasis on
+                        performance, visibility, and systems that stay useful
+                        after launch.
+                    </p>
+                    <p data-reveal data-delay="0.08">
+                        Most projects come to us for a new site, better SEO
+                        foundations, or a need to automate work that is still
+                        being handled manually.
+                    </p>
+                </div>
+            </div>
+
+            <aside class="services-hero__aside" data-reveal data-delay="0.12">
+                <div class="services-hero__panel">
+                    <p class="services-hero__panel-title">Typical outcomes</p>
+                    <ul class="services-hero__list">
+                        <li>Clearer websites that are easier to manage</li>
+                        <li>
+                            Better technical foundations for search visibility
+                        </li>
+                        <li>Less time spent on repetitive internal work</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+    <section class="services-list">
+        <div class="container">
+            <div class="services-list__intro">
+                <h2 class="services-list__title" data-split-words>
+                    What we can help with.
+                </h2>
+                <p class="services-list__lead" data-reveal>
+                    The work is tailored to the project, but these are the
+                    services teams usually come to us for.
+                </p>
+            </div>
+
+            <div class="services-list__rows" data-stagger-group>
+                {
+                    services.map(({ title, description, includes }) => (
+                        <article class="service-row" data-stagger-item>
+                            <div class="service-row__head">
+                                <h3 class="service-row__title">{title}</h3>
+                            </div>
+                            <div class="service-row__body">
+                                <p class="service-row__desc">{description}</p>
+                                <ul
+                                    class="service-row__includes"
+                                    aria-label={`Included in ${title}`}
+                                >
+                                    {includes.map((item) => (
+                                        <li>{item}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </article>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <section class="services-extra">
+        <div class="container services-extra__inner">
+            <div>
+                <h2 class="services-extra__title" data-reveal>
+                    Additional support, when needed.
+                </h2>
+                <p class="services-extra__text" data-reveal data-delay="0.06">
+                    Some teams come in with a broader list of technical issues.
+                    We can usually fold the essentials into the project if they
+                    support the main goal.
+                </p>
+            </div>
+
+            <ul class="services-extra__list" data-stagger-group>
+                {
+                    extras.map((item) => (
+                        <li class="services-extra__item" data-stagger-item>
+                            {item}
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+    </section>
+
+    <section class="services-closing">
+        <div class="container services-closing__inner">
+            <div>
+                <h2 class="services-closing__title" data-reveal>
+                    If you already know what needs fixing, that's a good place
+                    to start.
+                </h2>
+                <p class="services-closing__text" data-reveal data-delay="0.06">
+                    And if you do not, we can help you narrow it down before the
+                    work begins.
+                </p>
+            </div>
+
+            <a
+                href="/contact"
+                class="btn btn--primary services-closing__cta"
+                data-reveal
+                data-delay="0.12"
+            >
+                Discuss a Project
+            </a>
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+    .services-hero,
+    .services-list,
+    .services-extra,
+    .services-closing {
+        border-top: 1px solid var(--clr-border);
+    }
+
+    .services-hero {
+        padding-top: calc(var(--header-h) + clamp(4rem, 10vw, 7rem));
+        padding-bottom: clamp(4rem, 8vw, 6rem);
+    }
+
+    .services-hero__inner {
+        display: grid;
+        grid-template-columns: minmax(0, 1.65fr) minmax(280px, 0.75fr);
+        gap: clamp(2rem, 5vw, 4rem);
+        align-items: end;
+    }
+
+    .services-hero__title {
+        font-size: clamp(3rem, 8vw, 5.8rem);
+        font-weight: 400;
+        line-height: 0.96;
+        letter-spacing: -0.03em;
+        max-width: 10ch;
+        overflow: hidden;
+        text-wrap: balance;
+    }
+
+    .services-hero__text {
+        display: grid;
+        gap: 1rem;
+        margin-top: clamp(2rem, 4vw, 2.75rem);
+        max-width: 46rem;
+    }
+
+    .services-hero__text p {
+        max-width: 54ch;
+        font-size: clamp(1rem, 1.5vw, 1.1rem);
+        line-height: 1.8;
+        color: var(--clr-text-2);
+    }
+
+    .services-hero__panel {
+        padding: 1.5rem 0 0;
+        border-top: 1px solid var(--clr-border-2);
+    }
+
+    .services-hero__panel-title {
+        font-size: 0.88rem;
+        color: var(--clr-text);
+        margin-bottom: 1rem;
+    }
+
+    .services-hero__list {
+        display: grid;
+        gap: 0.9rem;
+    }
+
+    .services-hero__list li {
+        position: relative;
+        padding-left: 1rem;
+        font-size: 0.92rem;
+        line-height: 1.7;
+        color: var(--clr-text-2);
+    }
+
+    .services-hero__list li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.78rem;
+        width: 0.3rem;
+        height: 0.3rem;
+        border-radius: 50%;
+        background: var(--clr-accent);
+    }
+
+    .services-list {
+        padding-block: clamp(4rem, 8vw, 6rem);
+    }
+
+    .services-list__intro {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.8fr);
+        gap: 2rem;
+        margin-bottom: clamp(2.75rem, 5vw, 4rem);
+        align-items: end;
+    }
+
+    .services-list__title {
+        font-size: clamp(2.4rem, 5vw, 4.4rem);
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: -0.03em;
+        overflow: hidden;
+        text-wrap: balance;
+    }
+
+    .services-list__lead {
+        max-width: 34ch;
+        font-size: 0.98rem;
+        line-height: 1.75;
+        color: var(--clr-text-2);
+        justify-self: end;
+    }
+
+    .services-list__rows {
+        display: grid;
+        gap: 0;
+        border-top: 1px solid var(--clr-border);
+    }
+
+    .service-row {
+        display: grid;
+        grid-template-columns: minmax(220px, 0.78fr) minmax(0, 1fr);
+        gap: 2rem;
+        padding: 1.7rem 0;
+        border-bottom: 1px solid var(--clr-border);
+    }
+
+    .service-row__title {
+        font-size: clamp(1.2rem, 2vw, 1.5rem);
+        font-weight: 400;
+        letter-spacing: -0.02em;
+        max-width: 14ch;
+    }
+
+    .service-row__body {
+        display: grid;
+        gap: 1rem;
+    }
+
+    .service-row__desc {
+        max-width: 58ch;
+        font-size: 0.95rem;
+        line-height: 1.75;
+        color: var(--clr-text-2);
+    }
+
+    .service-row__includes {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+    }
+
+    .service-row__includes li,
+    .services-extra__item {
+        font-size: 0.72rem;
+        color: var(--clr-text-3);
+        padding: 0.38rem 0.78rem;
+        border: 1px solid var(--clr-border-2);
+        border-radius: var(--radius-full);
+    }
+
+    .services-extra {
+        padding-block: clamp(4rem, 8vw, 6rem);
+    }
+
+    .services-extra__inner {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+        gap: 2rem;
+        align-items: start;
+    }
+
+    .services-extra__title {
+        max-width: 14ch;
+        font-size: clamp(2rem, 4vw, 3.4rem);
+        font-weight: 400;
+        line-height: 1.04;
+        letter-spacing: -0.03em;
+    }
+
+    .services-extra__text {
+        margin-top: 1rem;
+        max-width: 46ch;
+        font-size: 0.95rem;
+        line-height: 1.75;
+        color: var(--clr-text-2);
+    }
+
+    .services-extra__list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+        align-content: start;
+    }
+
+    .services-closing {
+        padding-block: clamp(4rem, 8vw, 6rem) clamp(5rem, 10vw, 7rem);
+    }
+
+    .services-closing__inner {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 2rem;
+    }
+
+    .services-closing__title {
+        max-width: 16ch;
+        font-size: clamp(2rem, 4vw, 3.6rem);
+        font-weight: 400;
+        line-height: 1.02;
+        letter-spacing: -0.03em;
+    }
+
+    .services-closing__text {
+        margin-top: 1rem;
+        max-width: 42ch;
+        font-size: 0.95rem;
+        line-height: 1.75;
+        color: var(--clr-text-2);
+    }
+
+    .services-closing__cta {
+        flex-shrink: 0;
+    }
+
+    @media (max-width: 960px) {
+        .services-hero__inner,
+        .services-list__intro,
+        .services-extra__inner,
+        .service-row,
+        .services-closing__inner {
+            grid-template-columns: 1fr;
+            display: grid;
+            align-items: start;
+        }
+
+        .services-list__lead {
+            justify-self: start;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .services-hero__title {
+            max-width: 9ch;
+        }
+    }
+</style>

@@ -1,7 +1,388 @@
 ---
-import PageLayout from '../layouts/PageLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const projects = (await getCollection("portfolio")).sort(
+    (a, b) => a.data.order - b.data.order,
+);
 ---
 
-<PageLayout title="Our Portfolio">
-  <p>Check out our latest projects.</p>
-</PageLayout>
+<BaseLayout
+    title="Works"
+    description="A selection of websites and digital work completed by Northframe."
+>
+    <section class="works-hero">
+        <div class="container works-hero__inner">
+            <div class="works-hero__copy">
+                <h1 class="works-hero__title" data-split-words>
+                    Work that is live, useful, and built with care.
+                </h1>
+                <div class="works-hero__text">
+                    <p data-reveal>
+                        This page lists the projects we have completed so far.
+                        Each one is added here as it goes live, so the
+                        collection can keep growing over time.
+                    </p>
+                    <p data-reveal data-delay="0.08">
+                        Right now the list is short, but the structure is set up
+                        to make adding future work straightforward.
+                    </p>
+                </div>
+            </div>
+
+            <aside class="works-hero__aside" data-reveal data-delay="0.12">
+                <div class="works-hero__panel">
+                    <p class="works-hero__panel-title">Current collection</p>
+                    <div class="works-hero__count">
+                        <span class="works-hero__count-num"
+                            >{String(projects.length).padStart(2, "0")}</span
+                        >
+                        <span class="works-hero__count-label"
+                            >Project{projects.length === 1 ? "" : "s"} listed</span
+                        >
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+    <section class="works-list">
+        <div class="container">
+            <div class="works-list__intro">
+                <h2 class="works-list__title" data-split-words>
+                    Completed projects.
+                </h2>
+                <p class="works-list__lead" data-reveal>
+                    A simple overview of the work, with room to keep adding more
+                    as the portfolio expands.
+                </p>
+            </div>
+
+            <div class="works-list__rows" data-stagger-group>
+                {
+                    projects.map((project) => (
+                        <article class="work-row" data-stagger-item>
+                            <div class="work-row__meta">
+                                <p class="work-row__client">
+                                    {project.data.client}
+                                </p>
+                                <p class="work-row__status">
+                                    {project.data.status}
+                                </p>
+                            </div>
+
+                            <div class="work-row__main">
+                                <div class="work-row__top">
+                                    <h3 class="work-row__title">
+                                        {project.data.title}
+                                    </h3>
+                                    <a
+                                        href={project.data.website}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        class="work-row__link"
+                                    >
+                                        Visit Site
+                                        <svg
+                                            width="15"
+                                            height="15"
+                                            viewBox="0 0 15 15"
+                                            fill="none"
+                                            aria-hidden="true"
+                                        >
+                                            <path
+                                                d="M5 3h7v7M12 3 3 12"
+                                                stroke="currentColor"
+                                                stroke-width="1.4"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            />
+                                        </svg>
+                                    </a>
+                                </div>
+
+                                <p class="work-row__description">
+                                    {project.data.description}
+                                </p>
+
+                                <ul
+                                    class="work-row__services"
+                                    aria-label={`Services for ${project.data.title}`}
+                                >
+                                    {project.data.services.map((service) => (
+                                        <li>{service}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </article>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <section class="works-closing">
+        <div class="container works-closing__inner">
+            <div>
+                <h2 class="works-closing__title" data-reveal>
+                    More projects can be added as the work grows.
+                </h2>
+                <p class="works-closing__text" data-reveal data-delay="0.06">
+                    Each new project only needs a new file in `src/portfolio/`,
+                    and it will appear here automatically.
+                </p>
+            </div>
+            <a
+                href="/contact"
+                class="btn btn--primary works-closing__cta"
+                data-reveal
+                data-delay="0.12"
+            >
+                Talk About a Project
+            </a>
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+    .works-hero,
+    .works-list,
+    .works-closing {
+        border-top: 1px solid var(--clr-border);
+    }
+
+    .works-hero {
+        padding-top: calc(var(--header-h) + clamp(4rem, 10vw, 7rem));
+        padding-bottom: clamp(4rem, 8vw, 6rem);
+    }
+
+    .works-hero__inner {
+        display: grid;
+        grid-template-columns: minmax(0, 1.65fr) minmax(240px, 0.65fr);
+        gap: clamp(2rem, 5vw, 4rem);
+        align-items: end;
+    }
+
+    .works-hero__title {
+        font-size: clamp(3rem, 8vw, 5.8rem);
+        font-weight: 400;
+        line-height: 0.96;
+        letter-spacing: -0.03em;
+        max-width: 11ch;
+        overflow: hidden;
+        text-wrap: balance;
+    }
+
+    .works-hero__text {
+        display: grid;
+        gap: 1rem;
+        margin-top: clamp(2rem, 4vw, 2.75rem);
+        max-width: 46rem;
+    }
+
+    .works-hero__text p {
+        max-width: 54ch;
+        font-size: clamp(1rem, 1.5vw, 1.1rem);
+        line-height: 1.8;
+        color: var(--clr-text-2);
+    }
+
+    .works-hero__panel {
+        padding: 1.5rem 0 0;
+        border-top: 1px solid var(--clr-border-2);
+    }
+
+    .works-hero__panel-title {
+        font-size: 0.88rem;
+        color: var(--clr-text);
+        margin-bottom: 1rem;
+    }
+
+    .works-hero__count {
+        display: grid;
+        gap: 0.35rem;
+    }
+
+    .works-hero__count-num {
+        font-family: var(--font-display);
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        line-height: 1;
+        letter-spacing: -0.03em;
+    }
+
+    .works-hero__count-label {
+        font-size: 0.9rem;
+        color: var(--clr-text-2);
+    }
+
+    .works-list {
+        padding-block: clamp(4rem, 8vw, 6rem);
+    }
+
+    .works-list__intro {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.8fr);
+        gap: 2rem;
+        margin-bottom: clamp(2.75rem, 5vw, 4rem);
+        align-items: end;
+    }
+
+    .works-list__title {
+        font-size: clamp(2.4rem, 5vw, 4.4rem);
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: -0.03em;
+        overflow: hidden;
+        text-wrap: balance;
+    }
+
+    .works-list__lead {
+        max-width: 34ch;
+        font-size: 0.98rem;
+        line-height: 1.75;
+        color: var(--clr-text-2);
+        justify-self: end;
+    }
+
+    .works-list__rows {
+        display: grid;
+        gap: 0;
+        border-top: 1px solid var(--clr-border);
+    }
+
+    .work-row {
+        display: grid;
+        grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1fr);
+        gap: 2rem;
+        padding: 1.8rem 0;
+        border-bottom: 1px solid var(--clr-border);
+    }
+
+    .work-row__meta {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+
+    .work-row__client {
+        max-width: 28ch;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        color: var(--clr-text);
+    }
+
+    .work-row__status {
+        font-size: 0.78rem;
+        color: var(--clr-accent);
+    }
+
+    .work-row__main {
+        display: grid;
+        gap: 1rem;
+    }
+
+    .work-row__top {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    .work-row__title {
+        font-size: clamp(1.3rem, 2vw, 1.7rem);
+        font-weight: 400;
+        letter-spacing: -0.02em;
+    }
+
+    .work-row__link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-size: 0.82rem;
+        color: var(--clr-text-2);
+        white-space: nowrap;
+        transition: color var(--dur) var(--ease-out);
+    }
+
+    .work-row__link:hover {
+        color: var(--clr-text);
+    }
+
+    .work-row__description {
+        max-width: 60ch;
+        font-size: 0.96rem;
+        line-height: 1.8;
+        color: var(--clr-text-2);
+    }
+
+    .work-row__services {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+    }
+
+    .work-row__services li {
+        font-size: 0.72rem;
+        color: var(--clr-text-3);
+        padding: 0.38rem 0.78rem;
+        border: 1px solid var(--clr-border-2);
+        border-radius: var(--radius-full);
+    }
+
+    .works-closing {
+        padding-block: clamp(4rem, 8vw, 6rem) clamp(5rem, 10vw, 7rem);
+    }
+
+    .works-closing__inner {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 2rem;
+    }
+
+    .works-closing__title {
+        max-width: 15ch;
+        font-size: clamp(2rem, 4vw, 3.6rem);
+        font-weight: 400;
+        line-height: 1.02;
+        letter-spacing: -0.03em;
+    }
+
+    .works-closing__text {
+        margin-top: 1rem;
+        max-width: 46ch;
+        font-size: 0.95rem;
+        line-height: 1.75;
+        color: var(--clr-text-2);
+    }
+
+    .works-closing__cta {
+        flex-shrink: 0;
+    }
+
+    @media (max-width: 960px) {
+        .works-hero__inner,
+        .works-list__intro,
+        .work-row,
+        .works-closing__inner {
+            grid-template-columns: 1fr;
+            display: grid;
+            align-items: start;
+        }
+
+        .works-list__lead {
+            justify-self: start;
+        }
+
+        .work-row__top {
+            flex-direction: column;
+            align-items: start;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .works-hero__title {
+            max-width: 9ch;
+        }
+    }
+</style>
